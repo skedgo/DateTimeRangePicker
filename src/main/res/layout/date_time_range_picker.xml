@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="viewModel"
+      type="skedgo.datetimerangepicker.DateTimeRangePickerViewModel" />
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:isDone="@{viewModel.isCompletable}"
+        app:navigationIcon="@drawable/close" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:paddingBottom="48dp"
+          android:paddingLeft="16dp"
+          android:paddingTop="48dp"
+          android:text="@string/dateTimeRangePickerStartText"
+          android:textAllCaps="true"
+          android:textColor="@color/dateTimeRangePickerRangeTextColorInactive"
+          android:textSize="22sp"
+          app:isVisible="@{!viewModel.hasStartDate}" />
+
+        <LinearLayout
+          android:id="@+id/pickStartTimeView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="?android:attr/selectableItemBackground"
+          android:clickable="true"
+          android:focusable="true"
+          android:orientation="vertical"
+          android:paddingBottom="16dp"
+          android:paddingLeft="16dp"
+          android:paddingTop="16dp"
+          app:isVisible="@{viewModel.hasStartDate}">
+
+          <TextView
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateTimeRangePickerStartText"
+            android:textAllCaps="true"
+            android:textColor="@color/dateTimeRangePickerRangeTextColorActive" />
+
+          <TextView
+            style="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.startDateText}"
+            tools:text="14 Jan 2017" />
+
+          <TextView
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/arrow_drop_down"
+            android:text="@{viewModel.startTimeText}"
+            tools:text="0:00" />
+        </LinearLayout>
+
+        <View
+          android:layout_width="1dp"
+          android:layout_height="48dp"
+          android:background="#34FFFFFF" />
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:paddingBottom="48dp"
+          android:paddingLeft="16dp"
+          android:paddingTop="48dp"
+          android:text="@string/dateTimeRangePickerEndText"
+          android:textAllCaps="true"
+          android:textColor="@color/dateTimeRangePickerRangeTextColorInactive"
+          android:textSize="22sp"
+          app:isVisible="@{!viewModel.hasEndDate}" />
+
+        <LinearLayout
+          android:id="@+id/pickEndTimeView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="?android:attr/selectableItemBackground"
+          android:clickable="true"
+          android:focusable="true"
+          android:orientation="vertical"
+          android:paddingBottom="16dp"
+          android:paddingLeft="16dp"
+          android:paddingTop="16dp"
+          app:isVisible="@{viewModel.hasEndDate}">
+
+          <TextView
+            style="@style/Base.TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateTimeRangePickerEndText"
+            android:textAllCaps="true"
+            android:textColor="@color/dateTimeRangePickerRangeTextColorActive" />
+
+          <TextView
+            style="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.endDateText}"
+            tools:text="14 Jan 2017" />
+
+          <TextView
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/arrow_drop_down"
+            android:text="@{viewModel.endTimeText}"
+            tools:text="0:00" />
+        </LinearLayout>
+      </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <com.squareup.timessquare.CalendarPickerView
+      android:id="@+id/calendarPickerView"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:clipToPadding="false"
+      android:paddingTop="16dp"
+      android:scrollbarStyle="outsideOverlay"
+      app:tsquare_dayBackground="@drawable/day_background"
+      app:tsquare_dayTextColor="@drawable/day_text_color"
+      app:tsquare_dividerColor="@android:color/transparent"
+      app:tsquare_headerTextColor="@color/dateTimeRangePickerHeaderTextColor"
+      app:tsquare_titleTextColor="@color/dateTimeRangePickerTitleTextColor" />
+  </LinearLayout>
+</layout>

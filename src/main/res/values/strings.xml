@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="dateTimeRangePickerDoneText">Done</string>
+  <string name="dateTimeRangePickerStartText">Check in</string>
+  <string name="dateTimeRangePickerEndText">Check out</string>
+</resources>

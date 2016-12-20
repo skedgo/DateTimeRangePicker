@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="dateTimeRangePickerStateDefault">@android:color/black</color>
+  <color name="dateTimeRangePickerStateNonSelectable">#B9B9B9</color>
+  <color name="dateTimeRangePickerStateToday">#23b15e</color>
+  <color name="dateTimeRangePickerHeaderTextColor">@android:color/black</color>
+  <color name="dateTimeRangePickerTitleTextColor">@android:color/black</color>
+  <color name="dateTimeRangePickerRangeTextColorActive">@android:color/white</color>
+  <color name="dateTimeRangePickerRangeTextColorInactive">#B9B9B9</color>
+</resources>
