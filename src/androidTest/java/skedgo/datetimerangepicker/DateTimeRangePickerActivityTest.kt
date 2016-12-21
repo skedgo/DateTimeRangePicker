@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import org.joda.time.DateTime
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,6 +25,7 @@ class DateTimeRangePickerActivityTest {
   val countDownLatch: CountDownLatch by lazy { CountDownLatch(1) }
 
   @Before fun setUp() {
+    // To terminate the test after pressing back.
     val app = InstrumentationRegistry.getTargetContext().applicationContext as Application
     app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
       override fun onActivityPaused(activity: Activity?) {
@@ -56,6 +58,18 @@ class DateTimeRangePickerActivityTest {
             InstrumentationRegistry.getInstrumentation().targetContext,
             TimeZone.getDefault(),
             null, null
+        )
+    )
+    countDownLatch.await(10, TimeUnit.MINUTES)
+  }
+
+  @Test fun showDateTimeRangePickerWithStartAndEndDateTimes() {
+    activityTestRule.launchActivity(
+        DateTimeRangePickerActivity.newIntent(
+            InstrumentationRegistry.getInstrumentation().targetContext,
+            TimeZone.getDefault(),
+            DateTime.now().millis,
+            DateTime.now().plusDays(2).millis
         )
     )
     countDownLatch.await(10, TimeUnit.MINUTES)

@@ -106,7 +106,7 @@ class DateTimeRangePickerViewModel(private val timeFormatter: TimeFormatter) {
     }
     if (arguments.containsKey(KEY_END_TIME_IN_MILLIS)) {
       val endInMillis = arguments.getLong(KEY_END_TIME_IN_MILLIS)
-      startDateTime.onNext(DateTime(endInMillis, DateTimeZone.forTimeZone(timeZone)))
+      endDateTime.onNext(DateTime(endInMillis, DateTimeZone.forTimeZone(timeZone)))
     }
   }
 
