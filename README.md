@@ -1,4 +1,6 @@
 # DateTimeRangePicker
+[![](https://jitpack.io/v/skedgo/DateTimeRangePicker.svg)](https://jitpack.io/#skedgo/DateTimeRangePicker)
+
 A date time range picker for android
 
 ![No start date time and no end date time](images/Screenshot_1482250212.png) ![Pick start date](images/Screenshot_1482250219.png)
