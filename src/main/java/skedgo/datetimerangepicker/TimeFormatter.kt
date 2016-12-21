@@ -7,7 +7,7 @@ import org.joda.time.format.DateTimeFormat
 import java.util.*
 
 open class TimeFormatter(val context: Context) {
-  fun printTime(dateTime: DateTime): String {
+  open fun printTime(dateTime: DateTime): String {
     val formatter = if (DateFormat.is24HourFormat(context))
       DateTimeFormat.forPattern("H:mm").withLocale(Locale.getDefault())
     else
