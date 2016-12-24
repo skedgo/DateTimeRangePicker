@@ -80,7 +80,7 @@ class DateTimeRangePickerViewModel(private val timeFormatter: TimeFormatter) {
     return Intent()
         .putExtra(KEY_START_TIME_IN_MILLIS, startDateTime.value!!.millis)
         .putExtra(KEY_END_TIME_IN_MILLIS, endDateTime.value!!.millis)
-        .putExtra(KEY_TIME_ZONE, timeZone)
+        .putExtra(KEY_TIME_ZONE, timeZone!!.id)
   }
 
   fun updateSelectedDates(selectedDates: List<Date>) {
