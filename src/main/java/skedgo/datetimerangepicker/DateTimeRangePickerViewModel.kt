@@ -89,10 +89,13 @@ class DateTimeRangePickerViewModel(private val timeFormatter: TimeFormatter) {
       endDateTime.onNext(null)
       return
     }
-    startDateTime.onNext(DateTime(selectedDates.first().time))
+
+    val dateTimeZone = DateTimeZone.forTimeZone(timeZone)
+    val firstDateTime = DateTime(selectedDates.first().time, dateTimeZone)
+    startDateTime.onNext(firstDateTime)
     when {
-      selectedDates.size == 1 -> endDateTime.onNext(null)
-      else -> endDateTime.onNext(DateTime(selectedDates.last().time))
+      selectedDates.size == 1 -> endDateTime.onNext(firstDateTime)
+      else -> endDateTime.onNext(DateTime(selectedDates.last().time, dateTimeZone))
     }
   }
 
