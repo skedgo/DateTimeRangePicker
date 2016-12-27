@@ -52,7 +52,7 @@ class DateTimeRangePickerActivityTest {
     })
   }
 
-  @Test fun showDateTimeRangePickerWithoutStartAndEndDateTimes() {
+  @Test fun withoutStartAndEndDateTimes() {
     activityTestRule.launchActivity(
         DateTimeRangePickerActivity.newIntent(
             InstrumentationRegistry.getInstrumentation().targetContext,
@@ -63,7 +63,7 @@ class DateTimeRangePickerActivityTest {
     countDownLatch.await(10, TimeUnit.MINUTES)
   }
 
-  @Test fun showDateTimeRangePickerWithStartAndEndDateTimes() {
+  @Test fun withStartAndEndDateTimes() {
     activityTestRule.launchActivity(
         DateTimeRangePickerActivity.newIntent(
             InstrumentationRegistry.getInstrumentation().targetContext,

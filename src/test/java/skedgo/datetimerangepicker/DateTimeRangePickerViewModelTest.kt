@@ -57,4 +57,13 @@ class DateTimeRangePickerViewModelTest {
     val resultIntent = viewModel.createResultIntent()
     assertThat(resultIntent.getStringExtra("timeZone")).isEqualTo("CET")
   }
+
+  @Test fun shouldPickOneDateForBothStartAndEndDateTimes() {
+    viewModel.timeZone = TimeZone.getTimeZone("CET")
+    val selectedDateTime = DateTime.now(DateTimeZone.forID("CET"));
+
+    viewModel.updateSelectedDates(listOf(selectedDateTime.toDate()))
+    assertThat(viewModel.startDateTime.value).isEqualTo(selectedDateTime)
+    assertThat(viewModel.endDateTime.value).isEqualTo(selectedDateTime)
+  }
 }
