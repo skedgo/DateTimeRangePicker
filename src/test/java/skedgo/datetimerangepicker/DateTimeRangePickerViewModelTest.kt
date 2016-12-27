@@ -44,7 +44,7 @@ class DateTimeRangePickerViewModelTest {
     assertThat(viewModel.endDateTime.value!!).isEqualTo(endDateTime)
   }
 
-  @Test fun shouldCreateCorrectResultIntent() {
+  @Test fun shouldPutTimeZoneIdToResultIntent() {
     whenever(timeFormatter.printTime(any())).thenReturn("")
 
     val startDateTime = DateTime.now()
@@ -65,5 +65,59 @@ class DateTimeRangePickerViewModelTest {
     viewModel.updateSelectedDates(listOf(selectedDateTime.toDate()))
     assertThat(viewModel.startDateTime.value).isEqualTo(selectedDateTime)
     assertThat(viewModel.endDateTime.value).isEqualTo(selectedDateTime)
+  }
+
+  @Test fun shouldKeepTimesAfterPickingSameDateForBothStartAndEnd() {
+    viewModel.timeZone = TimeZone.getTimeZone("CET")
+
+    val startDateTime = DateTime(DateTimeZone.forID("CET"))
+        .withYear(2014).withMonthOfYear(12).withDayOfMonth(22)
+        .withHourOfDay(10).withMinuteOfHour(30).withSecondOfMinute(20)
+    viewModel.startDateTime.onNext(startDateTime)
+
+    val endDateTime = DateTime(DateTimeZone.forID("CET"))
+        .withYear(2014).withMonthOfYear(12).withDayOfMonth(23)
+        .withHourOfDay(12).withMinuteOfHour(30).withSecondOfMinute(30)
+    viewModel.endDateTime.onNext(endDateTime)
+
+    viewModel.updateSelectedDates(listOf(
+        DateTime(DateTimeZone.forID("CET"))
+            .withYear(2014).withMonthOfYear(12).withDayOfMonth(25)
+            .withHourOfDay(4).withMinuteOfHour(0).withSecondOfMinute(10)
+            .toDate()
+    ))
+    assertThat(viewModel.startDateTime.value.toLocalTime())
+        .isEqualTo(startDateTime.toLocalTime())
+    assertThat(viewModel.endDateTime.value.toLocalTime())
+        .isEqualTo(endDateTime.toLocalTime())
+  }
+
+  @Test fun shouldKeepTimesAfterPickingDifferentDatesForBothStartAndEnd() {
+    viewModel.timeZone = TimeZone.getTimeZone("CET")
+
+    val startDateTime = DateTime(DateTimeZone.forID("CET"))
+        .withYear(2014).withMonthOfYear(12).withDayOfMonth(22)
+        .withHourOfDay(10).withMinuteOfHour(30).withSecondOfMinute(20)
+    viewModel.startDateTime.onNext(startDateTime)
+
+    val endDateTime = DateTime(DateTimeZone.forID("CET"))
+        .withYear(2014).withMonthOfYear(12).withDayOfMonth(23)
+        .withHourOfDay(12).withMinuteOfHour(30).withSecondOfMinute(30)
+    viewModel.endDateTime.onNext(endDateTime)
+
+    viewModel.updateSelectedDates(listOf(
+        DateTime(DateTimeZone.forID("CET"))
+            .withYear(2014).withMonthOfYear(12).withDayOfMonth(25)
+            .withHourOfDay(4).withMinuteOfHour(0).withSecondOfMinute(10)
+            .toDate(),
+        DateTime(DateTimeZone.forID("CET"))
+            .withYear(2014).withMonthOfYear(12).withDayOfMonth(26)
+            .withHourOfDay(5).withMinuteOfHour(30).withSecondOfMinute(40)
+            .toDate()
+    ))
+    assertThat(viewModel.startDateTime.value.toLocalTime())
+        .isEqualTo(startDateTime.toLocalTime())
+    assertThat(viewModel.endDateTime.value.toLocalTime())
+        .isEqualTo(endDateTime.toLocalTime())
   }
 }
