@@ -91,12 +91,25 @@ class DateTimeRangePickerViewModel(private val timeFormatter: TimeFormatter) {
     }
 
     val dateTimeZone = DateTimeZone.forTimeZone(timeZone)
-    val firstDateTime = DateTime(selectedDates.first().time, dateTimeZone)
-    startDateTime.onNext(firstDateTime)
-    when {
-      selectedDates.size == 1 -> endDateTime.onNext(firstDateTime)
-      else -> endDateTime.onNext(DateTime(selectedDates.last().time, dateTimeZone))
+    val startDateTimeValue = { DateTime(selectedDates.first().time, dateTimeZone) }
+    startDateTime.onNext(when {
+      startDateTime.hasValue() -> {
+        startDateTimeValue()
+            .withTime(startDateTime.value!!.toLocalTime())
+      }
+      else -> startDateTimeValue()
+    })
+
+    val endDateTimeValue = when {
+      selectedDates.size == 1 -> startDateTimeValue()
+      else -> DateTime(selectedDates.last().time, dateTimeZone)
     }
+    endDateTime.onNext(when {
+      endDateTime.hasValue() -> {
+        endDateTimeValue.withTime(endDateTime.value!!.toLocalTime())
+      }
+      else -> endDateTimeValue
+    })
   }
 
   fun handleArgs(arguments: Bundle) {
