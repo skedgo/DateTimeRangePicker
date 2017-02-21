@@ -1,6 +1,6 @@
 buildscript {
   ext.androidPluginVersion = '2.2.3'
-  ext.kotlinVersion = '1.0.5-3'
+  ext.kotlinVersion = '1.0.6'
   ext.supportLibraryVersion = '25.1.0'
 
   repositories {
@@ -19,7 +19,6 @@ apply plugin: 'kotlin-android'
 
 repositories {
   jcenter()
-  maven { url "https://jitpack.io" }
 }
 
 android {
@@ -52,13 +51,12 @@ dependencies {
   testCompile 'org.robolectric:robolectric:3.1.4'
   testCompile 'com.nhaarman:mockito-kotlin:1.0.1'
 
-  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
-  })
+  }
 
   compile 'io.reactivex:rxjava:1.2.0'
   compile 'net.danlew:android.joda:2.9.3.1'
-  compile 'com.github.skedgo:activity-animations:v1.0'
   compile 'com.squareup:android-times-square:1.6.5@aar'
   compile "com.android.support:appcompat-v7:$supportLibraryVersion"
   compile "com.android.support:design:$supportLibraryVersion"
