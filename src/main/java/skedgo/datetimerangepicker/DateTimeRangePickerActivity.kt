@@ -6,15 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.util.Pair
+import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import com.squareup.timessquare.CalendarPickerView
 import org.joda.time.DateTime
-import skedgo.anim.AnimatedTransitionActivity
 import skedgo.datetimerangepicker.databinding.DateTimeRangePickerBinding
 import java.util.*
 
-class DateTimeRangePickerActivity : AnimatedTransitionActivity() {
+class DateTimeRangePickerActivity : AppCompatActivity() {
   companion object {
     fun newIntent(
         context: Context?,
@@ -40,8 +39,6 @@ class DateTimeRangePickerActivity : AnimatedTransitionActivity() {
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    setEnteringAnimation(Pair(R.anim.entering_slide_up, R.anim.exiting_fade_out))
-    setExitingAnimation(Pair(R.anim.entering_fade_in, R.anim.exiting_slide_down))
     super.onCreate(savedInstanceState)
 
     viewModel.handleArgs(intent.extras)
