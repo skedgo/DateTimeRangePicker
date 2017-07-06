@@ -1,7 +1,7 @@
 buildscript {
   ext.androidPluginVersion = '3.0.0-alpha5'
   ext.kotlinVersion = '1.1.3'
-  ext.supportLibraryVersion = '25.1.0'
+  ext.supportLibraryVersion = '25.3.1'
 
   repositories {
     jcenter()
